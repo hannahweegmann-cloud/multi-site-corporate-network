@@ -2,7 +2,7 @@
 
 Cisco Packet Tracer project connecting a segmented headquarters network and branch office through a simulated ISP. The design uses dynamic routing, centralized DHCP, access controls, address translation, and redundant switching.
 
-![Network design](assets/network-diagram.svg)
+![Network design]
 
 ## Project goals
 
@@ -21,8 +21,7 @@ The network contains three Cisco 2911 routers, four Cisco 2960 switches, six PCs
 
 ### Packet Tracer implementation
 
-![Packet Tracer topology](assets/packet-tracer-topology.png)
-
+![Packet Tracer topology]
 | Zone | Devices | Purpose |
 | --- | --- | --- |
 | HQ | HQ-R1, HQ-SW1, HQ-SW2, four PCs, internal server | Department segmentation, inter-VLAN routing, PAT, redundant switching |
