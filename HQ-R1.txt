@@ -1,0 +1,67 @@
+hostname HQ-R1
+no ip domain-lookup
+!
+interface GigabitEthernet0/0
+ description WAN-TO-ISP
+ ip address 10.0.0.1 255.255.255.252
+ ip nat outside
+ no shutdown
+!
+interface GigabitEthernet0/1
+ no ip address
+ no shutdown
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ description HQ-ADMIN-GATEWAY
+ ip address 192.168.10.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ description HQ-USERS-GATEWAY
+ ip address 192.168.20.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 30
+ description HQ-SERVERS-GATEWAY
+ ip address 192.168.30.1 255.255.255.0
+ ip nat inside
+!
+ip dhcp excluded-address 192.168.10.1 192.168.10.20
+ip dhcp excluded-address 192.168.20.1 192.168.20.20
+ip dhcp excluded-address 192.168.30.1 192.168.30.20
+!
+ip dhcp pool HQ-ADMIN
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool HQ-USERS
+ network 192.168.20.0 255.255.255.0
+ default-router 192.168.20.1
+ dns-server 8.8.8.8
+!
+ip dhcp pool HQ-SERVERS
+ network 192.168.30.0 255.255.255.0
+ default-router 192.168.30.1
+ dns-server 8.8.8.8
+!
+router ospf 1
+ router-id 1.1.1.1
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 192.168.30.0 0.0.0.255 area 0
+ passive-interface GigabitEthernet0/1
+!
+ip access-list extended HQ-NAT
+ deny ip 192.168.10.0 0.0.0.255 192.168.40.0 0.0.0.255
+ deny ip 192.168.20.0 0.0.0.255 192.168.40.0 0.0.0.255
+ deny ip 192.168.30.0 0.0.0.255 192.168.40.0 0.0.0.255
+ permit ip 192.168.10.0 0.0.0.255 any
+ permit ip 192.168.20.0 0.0.0.255 any
+ permit ip 192.168.30.0 0.0.0.255 any
+!
+ip nat inside source list HQ-NAT interface GigabitEthernet0/0 overload

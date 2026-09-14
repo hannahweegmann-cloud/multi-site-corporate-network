@@ -1,0 +1,31 @@
+hostname BRANCH-R1
+no ip domain-lookup
+!
+interface GigabitEthernet0/0
+ description WAN-TO-ISP
+ ip address 10.0.0.6 255.255.255.252
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description BRANCH-USERS-GATEWAY
+ ip address 192.168.40.1 255.255.255.0
+ ip access-group BRANCH-SECURITY in
+ no shutdown
+!
+ip dhcp excluded-address 192.168.40.1 192.168.40.20
+!
+ip dhcp pool BRANCH-USERS
+ network 192.168.40.0 255.255.255.0
+ default-router 192.168.40.1
+ dns-server 8.8.8.8
+!
+router ospf 1
+ router-id 3.3.3.3
+ network 10.0.0.4 0.0.0.3 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+ passive-interface GigabitEthernet0/1
+!
+ip access-list extended BRANCH-SECURITY
+ remark BLOCK-BRANCH-FROM-HQ-ADMIN
+ deny ip 192.168.40.0 0.0.0.255 192.168.10.0 0.0.0.255
+ permit ip 192.168.40.0 0.0.0.255 any

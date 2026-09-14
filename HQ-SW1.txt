@@ -1,0 +1,44 @@
+hostname HQ-SW1
+no ip domain-lookup
+!
+vlan 10
+ name HQ-ADMIN
+vlan 20
+ name HQ-USERS
+vlan 30
+ name HQ-SERVERS
+!
+interface FastEthernet0/1
+ description TRUNK-TO-HQ-R1
+ switchport mode trunk
+ no shutdown
+!
+interface FastEthernet0/2
+ description HQ-PC1-ADMIN
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ description HQ-PC2-USERS
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ description HQ-SERVER
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/6
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface Port-channel1
+ description LACP-TO-HQ-SW2
+ switchport mode trunk

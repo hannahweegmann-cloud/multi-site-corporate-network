@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Multi-Site Corporate Network</title>
+  <desc id="desc">Headquarters, ISP, and branch network with VLANs, OSPF routing, PAT, access control, and LACP EtherChannel.</desc>
+  <defs>
+    <style>
+      .zone{stroke:#aeb8c4;stroke-width:2;rx:18}.hq{fill:#eef6ff}.public{fill:#f5f2ff}.branch{fill:#eefaf4}
+      .node{fill:#fff;stroke:#34495e;stroke-width:2;rx:10}.router{fill:#dbeafe}.switch{fill:#dcfce7}.server{fill:#fef3c7}.pc{fill:#f8fafc}
+      .link{stroke:#475569;stroke-width:3;fill:none}.wan{stroke:#7c3aed}.ether{stroke:#0284c7;stroke-width:5}.access{stroke:#64748b;stroke-width:2}
+      .title{font:700 24px Arial,sans-serif;fill:#172033}.zone-title{font:700 18px Arial,sans-serif;fill:#172033}.label{font:700 14px Arial,sans-serif;fill:#172033}.small{font:12px Arial,sans-serif;fill:#475569}.tiny{font:11px Arial,sans-serif;fill:#475569}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#ffffff"/>
+  <text class="title" x="600" y="35" text-anchor="middle">Multi-Site Corporate Network</text>
+
+  <rect class="zone hq" x="25" y="60" width="500" height="560"/>
+  <rect class="zone public" x="545" y="60" width="230" height="560"/>
+  <rect class="zone branch" x="795" y="60" width="380" height="560"/>
+  <text class="zone-title" x="275" y="92" text-anchor="middle">HQ NETWORK</text>
+  <text class="zone-title" x="660" y="92" text-anchor="middle">ISP / PUBLIC NETWORK</text>
+  <text class="zone-title" x="985" y="92" text-anchor="middle">BRANCH NETWORK</text>
+
+  <path class="link wan" d="M430 142 H600"/><text class="small" x="515" y="132" text-anchor="middle">10.0.0.0/30</text>
+  <path class="link wan" d="M720 142 H860"/><text class="small" x="790" y="132" text-anchor="middle">10.0.0.4/30</text>
+
+  <rect class="node router" x="315" y="115" width="115" height="55"/><text class="label" x="372" y="138" text-anchor="middle">HQ-R1</text><text class="tiny" x="372" y="155" text-anchor="middle">ROAS • PAT • OSPF</text>
+  <rect class="node router" x="600" y="115" width="120" height="55"/><text class="label" x="660" y="148" text-anchor="middle">ISP</text>
+  <rect class="node router" x="860" y="115" width="135" height="55"/><text class="label" x="927" y="138" text-anchor="middle">BRANCH-R1</text><text class="tiny" x="927" y="155" text-anchor="middle">OSPF • ACL</text>
+
+  <path class="link" d="M372 170 L260 235"/>
+  <rect class="node switch" x="125" y="235" width="125" height="55"/><text class="label" x="187" y="268" text-anchor="middle">HQ-SW1</text>
+  <rect class="node switch" x="350" y="235" width="125" height="55"/><text class="label" x="412" y="268" text-anchor="middle">HQ-SW2</text>
+  <path class="link ether" d="M250 250 H350"/><path class="link ether" d="M250 275 H350"/><text class="tiny" x="300" y="225" text-anchor="middle">LACP EtherChannel Po1</text>
+
+  <path class="link access" d="M150 290 L95 385"/><path class="link access" d="M185 290 V385"/><path class="link access" d="M220 290 L275 385"/>
+  <rect class="node pc" x="45" y="385" width="100" height="55"/><text class="label" x="95" y="408" text-anchor="middle">HQ-PC1</text><text class="tiny" x="95" y="426" text-anchor="middle">VLAN 10</text>
+  <rect class="node pc" x="135" y="385" width="100" height="55"/><text class="label" x="185" y="408" text-anchor="middle">HQ-PC2</text><text class="tiny" x="185" y="426" text-anchor="middle">VLAN 20</text>
+  <rect class="node server" x="225" y="385" width="125" height="70"/><text class="label" x="287" y="408" text-anchor="middle">HQ Server</text><text class="tiny" x="287" y="426" text-anchor="middle">VLAN 30</text><text class="tiny" x="287" y="443" text-anchor="middle">192.168.30.10</text>
+  <path class="link access" d="M390 290 L390 385"/><path class="link access" d="M440 290 L475 385"/>
+  <rect class="node pc" x="350" y="385" width="90" height="55"/><text class="label" x="395" y="408" text-anchor="middle">HQ-PC4</text><text class="tiny" x="395" y="426" text-anchor="middle">VLAN 10</text>
+  <rect class="node pc" x="435" y="385" width="90" height="55"/><text class="label" x="480" y="408" text-anchor="middle">HQ-PC3</text><text class="tiny" x="480" y="426" text-anchor="middle">VLAN 20</text>
+  <text class="small" x="275" y="520" text-anchor="middle">VLAN 10 Admin • VLAN 20 Users • VLAN 30 Servers</text>
+
+  <path class="link" d="M660 170 V245"/>
+  <rect class="node switch" x="600" y="245" width="120" height="55"/><text class="label" x="660" y="278" text-anchor="middle">ISP-SW</text>
+  <path class="link access" d="M660 300 V385"/>
+  <rect class="node server" x="590" y="385" width="140" height="70"/><text class="label" x="660" y="408" text-anchor="middle">Public Server</text><text class="tiny" x="660" y="426" text-anchor="middle">203.0.113.10/24</text>
+
+  <path class="link" d="M927 170 V245"/>
+  <rect class="node switch" x="865" y="245" width="125" height="55"/><text class="label" x="927" y="278" text-anchor="middle">BR-SW1</text>
+  <path class="link access" d="M900 300 L860 385"/><path class="link access" d="M955 300 L1005 385"/>
+  <rect class="node pc" x="800" y="385" width="120" height="55"/><text class="label" x="860" y="408" text-anchor="middle">BRANCH-PC1</text><text class="tiny" x="860" y="426" text-anchor="middle">VLAN 40</text>
+  <rect class="node pc" x="945" y="385" width="120" height="55"/><text class="label" x="1005" y="408" text-anchor="middle">BRANCH-PC2</text><text class="tiny" x="1005" y="426" text-anchor="middle">VLAN 40</text>
+  <text class="small" x="985" y="495" text-anchor="middle">192.168.40.0/24</text>
+  <text class="small" x="985" y="520" text-anchor="middle">ACL blocks access to HQ Admin</text>
+
+  <text class="small" x="600" y="595" text-anchor="middle">OSPF Area 0 connects all routed networks</text>
+</svg>
