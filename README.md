@@ -21,7 +21,7 @@ The network contains three Cisco 2911 routers, four Cisco 2960 switches, six PCs
 
 ### Packet Tracer implementation
 
-![Packet Tracer topology](packet-tracer-topology.png)
+<img width="1201" height="769" alt="packet-tracer-topology png" src="https://github.com/user-attachments/assets/74f34f6b-2473-4995-b570-cab755dd5881" />
 | Zone | Devices | Purpose |
 | --- | --- | --- |
 | HQ | HQ-R1, HQ-SW1, HQ-SW2, four PCs, internal server | Department segmentation, inter-VLAN routing, PAT, redundant switching |
